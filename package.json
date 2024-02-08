@@ -1,14 +1,14 @@
 {
-  "name": "@byndyusoft/typescript-template",
-  "version": "0.0.0-development",
-  "description": "Base template for TypeScript packages",
-  "homepage": "https://github.com/Byndyusoft/node-typescript-template#readme",
+  "name": "@byndyusoft/nest-opentelemetry-configurator",
+  "version": "1.0.0-dev",
+  "description": "Nest.js opentelemtry configurator",
+  "homepage": "https://github.com/Byndyusoft/nest-opentelemetry-configurator#readme",
   "bugs": {
-    "url": "https://github.com/Byndyusoft/node-typescript-template/issues"
+    "url": "https://github.com/Byndyusoft/nest-opentelemetry-configurator/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Byndyusoft/node-typescript-template.git"
+    "url": "https://github.com/Byndyusoft/nest-opentelemetry-configurator.git"
   },
   "license": "Apache-2.0",
   "author": "Byndyusoft",
