@@ -2,12 +2,6 @@
 
 Opentelemetry tracing module for Nest.js services
 
-## Repo
-
-Structure is described in root [package.json](./package.json) and contains the following packages:
-
-- [opentelemetryConfigurator](./packages/nest-opentelemetry-configurator) - tracing module
-
 ## Prerequisites
 
 Make sure you have installed all of the following prerequisites on your development machine:
