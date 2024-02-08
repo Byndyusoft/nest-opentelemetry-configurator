@@ -1,36 +1,80 @@
-# ᐸRepository nameᐳ
+# nest-opentelemetry-configurator
 
-[![npm@latest](https://img.shields.io/npm/v/@byndyusoft/typescript-template/latest.svg)](https://www.npmjs.com/package/@byndyusoft/typescript-template)
-[![test](https://github.com/Byndyusoft/node-typescript-template/actions/workflows/test.yaml/badge.svg?branch=master)](https://github.com/Byndyusoft/node-typescript-template/actions/workflows/test.yaml)
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
-[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+Opentelemetry tracing module for Nest.js services
 
-ᐸRepository descriptionᐳ
+## Repo
 
-## Requirements
+Structure is described in root [package.json](./package.json) and contains the following packages:
 
-- Node.js v14 LTS or later
-- Yarn
+- [opentelemetryConfigurator](./packages/nest-opentelemetry-configurator) - tracing module
 
-## Install
+## Prerequisites
 
-```bash
-yarn add ᐸPackage nameᐳ
-```
+Make sure you have installed all of the following prerequisites on your development machine:
+
+- [Git](https://git-scm.com)
+- [Node.js](https://nodejs.org) (version 16 LTS or higher)
+- [Yarn](https://yarnpkg.com) package manager
+
+## Code conventions
+
+Some code conventions are enforced automatically by ESLint + Prettier + markdownlint + husky + lint-staged stack.
+
+## Service development lifecycle
+
+- Implement business logic
+- Add or adapt unit-tests (prefer before and simultaneously with coding)
+- Add or change the documentation as needed
+- Open pull request in the correct branch. Target the project's `master` branch
 
 ## Usage
 
-```typescript
-// Usage example
-```
+1. Import module in `main.ts`
 
-## Maintainers
+   ```typescript
+   import { OpenTelemetryConfigurator } from "@byndyusoft/opentelemetry-configurator";
+   ```
 
-- [@Byndyusoft/owners](https://github.com/orgs/Byndyusoft/teams/owners) <<github.maintain@byndyusoft.com>>
-- [@Byndyusoft/team](https://github.com/orgs/Byndyusoft/teams/team)
-- [@KillWolfVlad](https://github.com/KillWolfVlad)
+2. Call setup method before creating app with options
 
-## License
+   IMPORTANT! Setup method has to be called before importing http module. This means that there should be no `http` module import in the `main.ts`
 
-This repository is released under version 2.0 of the
-[Apache License](https://www.apache.org/licenses/LICENSE-2.0).
+   ```typescript
+   async function bootstrap(): Promise<void> {
+     await OpenTelemetryConfigurator.setup({
+       serviceName: "service name",
+       exporterUrl: "http://jaeger_host:4318/v1/traces",
+       ignoreUrls: ["_healthz", "_readiness", "metrics", "engine-rest/external-task/fetchAndLock"], // Optional. Default values
+     });
+
+     const app = (await NestFactory.create)<NestExpressApplication>(await AppModule.register(), {
+       bufferLogs: true,
+     });
+     //  ...
+   }
+   ```
+
+3. Add `TracingInterceptor` for controllers.
+
+   By default `TracingInterceptor` set span name from route of controller method.
+   If you need to change the span name use a decorator `SpanName`
+
+   ```typescript
+   import { SpanName, TracingInterceptor } from "@byndyusoft/nest-opentelemetry-configurator";
+
+   @UseInterceptors(TracingInterceptor)
+   export class AppController {
+     // Span name is /returns/{returnId}
+     @Get("/returns/:returnId")
+     public async get(/*...*/) {
+       //....
+     }
+
+     // Span name is customName
+     @SpanName("customName")
+     @Post("/returns/:returnId")
+     public async update(/*...*/) {
+       //....
+     }
+   }
+   ```
