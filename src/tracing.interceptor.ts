@@ -68,6 +68,7 @@ export class TracingInterceptor implements NestInterceptor {
         const response = executionContext
           .switchToHttp()
           .getResponse<Response>();
+
         span?.setAttributes({
           "http.response.body": String(data),
           error: response.statusCode >= 500,
