@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Byndyusoft
+ * Copyright 2024 Byndyusoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,8 +14,25 @@
  * limitations under the License.
  */
 
-export class HelloWorldService {
-  public getHelloWorldMessage(): string {
-    return "Hello World!";
-  }
+/* eslint-disable @typescript-eslint/no-empty-function */
+
+import { Reflector } from "@nestjs/core";
+
+import { SpanName } from "./span-name.decorator";
+
+class TestClass {
+  @SpanName("testSpan")
+  public someMethod(): void {}
 }
+
+describe("SpanName decorator", () => {
+  it("define span name metadata for a method", () => {
+    const reflector = new Reflector();
+    const metadata = reflector.get<string>(
+      SpanName.name,
+      TestClass.prototype.someMethod,
+    );
+
+    expect(metadata).toBe("testSpan");
+  });
+});
