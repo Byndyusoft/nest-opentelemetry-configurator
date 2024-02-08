@@ -1,7 +1,27 @@
 branches: master
 
 plugins:
-  - "@semantic-release/commit-analyzer"
+  - - "@semantic-release/commit-analyzer"
+    - parserOpts:
+        noteKeywords:
+          - BREAKING CHANGE
+          - BREAKING CHANGES
+      preset: angular
+      releaseRules:
+        - release: patch
+          scope: README
+          type: docs
+
+        - release: minor
+          scope: core-*
+          type: refactor
+
+        - release: patch
+          type: refactor
+
+        - release: false
+          scope: no-release
+
   - "@semantic-release/release-notes-generator"
   - "@semantic-release/npm"
   - "@semantic-release/github"
