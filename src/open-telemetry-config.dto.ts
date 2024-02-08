@@ -17,10 +17,5 @@
 export class OpentelemetryConfigDto {
   public exporterUrl!: string;
   public serviceName!: string;
-  public ignoreUrls: string[] = [
-    "_healthz",
-    "_readiness",
-    "metrics",
-    "engine-rest/external-task/fetchAndLock",
-  ];
+  public ignoreUrls: string[] = ["_healthz", "_readiness", "metrics", "engine-rest/external-task/fetchAndLock"];
 }

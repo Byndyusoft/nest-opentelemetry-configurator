@@ -28,10 +28,7 @@ class TestClass {
 describe("SpanName decorator", () => {
   it("define span name metadata for a method", () => {
     const reflector = new Reflector();
-    const metadata = reflector.get<string>(
-      SpanName.name,
-      TestClass.prototype.someMethod,
-    );
+    const metadata = reflector.get<string>(SpanName.name, TestClass.prototype.someMethod);
 
     expect(metadata).toBe("testSpan");
   });

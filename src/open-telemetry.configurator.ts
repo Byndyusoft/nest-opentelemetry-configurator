@@ -18,11 +18,7 @@ import { RequestOptions } from "http";
 
 import { trace } from "@opentelemetry/api";
 import { AsyncLocalStorageContextManager } from "@opentelemetry/context-async-hooks";
-import {
-  CompositePropagator,
-  W3CBaggagePropagator,
-  W3CTraceContextPropagator,
-} from "@opentelemetry/core";
+import { CompositePropagator, W3CBaggagePropagator, W3CTraceContextPropagator } from "@opentelemetry/core";
 import { OTLPTraceExporter } from "@opentelemetry/exporter-trace-otlp-http";
 import { HttpInstrumentation } from "@opentelemetry/instrumentation-http";
 import { JaegerPropagator } from "@opentelemetry/propagator-jaeger";
@@ -44,11 +40,7 @@ export class OpenTelemetryConfigurator {
       spanProcessor: new BatchSpanProcessor(exporter),
       contextManager: new AsyncLocalStorageContextManager(),
       textMapPropagator: new CompositePropagator({
-        propagators: [
-          new JaegerPropagator(),
-          new W3CTraceContextPropagator(),
-          new W3CBaggagePropagator(),
-        ],
+        propagators: [new JaegerPropagator(), new W3CTraceContextPropagator(), new W3CBaggagePropagator()],
       }),
       instrumentations: [
         new HttpInstrumentation({

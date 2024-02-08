@@ -16,5 +16,4 @@
 
 import { CustomDecorator, SetMetadata } from "@nestjs/common";
 
-export const SpanName = (spanName: string): CustomDecorator =>
-  SetMetadata(SpanName.name, spanName);
+export const SpanName = (spanName: string): CustomDecorator => SetMetadata(SpanName.name, spanName);

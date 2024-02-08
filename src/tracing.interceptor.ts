@@ -14,12 +14,7 @@
  * limitations under the License.
  */
 
-import {
-  CallHandler,
-  ExecutionContext,
-  Injectable,
-  NestInterceptor,
-} from "@nestjs/common";
+import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from "@nestjs/common";
 import { PATH_METADATA } from "@nestjs/common/constants";
 import { Reflector } from "@nestjs/core";
 import { context, trace } from "@opentelemetry/api";
@@ -32,25 +27,14 @@ import { SpanName } from "./span-name.decorator";
 export class TracingInterceptor implements NestInterceptor {
   public constructor(private reflector: Reflector) {}
 
-  public intercept(
-    executionContext: ExecutionContext,
-    next: CallHandler,
-  ): Observable<unknown> {
-    let spanName = this.reflector.get<string>(
-      SpanName.name,
-      executionContext.getHandler(),
-    );
+  public intercept(executionContext: ExecutionContext, next: CallHandler): Observable<unknown> {
+    let spanName = this.reflector.get<string>(SpanName.name, executionContext.getHandler());
 
     if (!spanName) {
-      const pathMeta = this.reflector.get<string>(
-        PATH_METADATA,
-        executionContext.getHandler(),
-      );
+      const pathMeta = this.reflector.get<string>(PATH_METADATA, executionContext.getHandler());
       spanName = pathMeta
         .split("/")
-        .map((pathPart) =>
-          pathPart.includes(":") ? `{${pathPart.replace(":", "")}}` : pathPart,
-        )
+        .map((pathPart) => (pathPart.includes(":") ? `{${pathPart.replace(":", "")}}` : pathPart))
         .join("/");
     }
 
@@ -65,9 +49,7 @@ export class TracingInterceptor implements NestInterceptor {
 
     return next.handle().pipe(
       tap((data) => {
-        const response = executionContext
-          .switchToHttp()
-          .getResponse<Response>();
+        const response = executionContext.switchToHttp().getResponse<Response>();
 
         span?.setAttributes({
           "http.response.body": String(data),

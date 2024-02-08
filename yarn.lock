@@ -458,21 +458,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@byndyusoft/tsconfig@npm:1.2.0":
-  version: 1.2.0
-  resolution: "@byndyusoft/tsconfig@npm:1.2.0"
-  dependencies:
-    "@tsconfig/node12": "npm:^1.0.7"
-    "@tsconfig/node14": "npm:^1.0.0"
-    "@tsconfig/node16": "npm:^1.0.1"
-    "@tsconfig/node18": "npm:^1.0.1"
-  checksum: 8f5e4a164c6910ac151bc485e8be4670b82514aa205a7a252e219909fe6045d55959dd0abcb75d8615d086fe34318fee1aa2dc31d0badd6ae87201d701385dcb
-  languageName: node
-  linkType: hard
-
-"@byndyusoft/typescript-template@workspace:.":
+"@byndyusoft/nest-opentelemetry-configurator@workspace:.":
   version: 0.0.0-use.local
-  resolution: "@byndyusoft/typescript-template@workspace:."
+  resolution: "@byndyusoft/nest-opentelemetry-configurator@workspace:."
   dependencies:
     "@byndyusoft/eslint-config": "npm:2.5.0"
     "@byndyusoft/tsconfig": "npm:1.2.0"
@@ -516,6 +504,18 @@ __metadata:
     rxjs: ^7.8.0
   languageName: unknown
   linkType: soft
+
+"@byndyusoft/tsconfig@npm:1.2.0":
+  version: 1.2.0
+  resolution: "@byndyusoft/tsconfig@npm:1.2.0"
+  dependencies:
+    "@tsconfig/node12": "npm:^1.0.7"
+    "@tsconfig/node14": "npm:^1.0.0"
+    "@tsconfig/node16": "npm:^1.0.1"
+    "@tsconfig/node18": "npm:^1.0.1"
+  checksum: 8f5e4a164c6910ac151bc485e8be4670b82514aa205a7a252e219909fe6045d55959dd0abcb75d8615d086fe34318fee1aa2dc31d0badd6ae87201d701385dcb
+  languageName: node
+  linkType: hard
 
 "@colors/colors@npm:1.5.0":
   version: 1.5.0
