@@ -1,4 +1,13 @@
 {
   "root": true,
-  "extends": ["@byndyusoft/eslint-config/header-apache-2.0", "@byndyusoft/eslint-config/backend"]
+  "extends": ["@byndyusoft/eslint-config/header-apache-2.0", "@byndyusoft/eslint-config/backend"],
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "rules": {
+        "dirs/dirnames": [2, { "pattern": "^[a-zA-Z0-9_-]+$" }],
+        "unicorn/filename-case": ["warn", { "case": "kebabCase" }]
+      }
+    }
+  ]
 }

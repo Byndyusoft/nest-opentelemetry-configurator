@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Byndyusoft
+ * Copyright 2024 Byndyusoft
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,4 +14,7 @@
  * limitations under the License.
  */
 
-export * from "./helloWorldService";
+export * from "./open-telemetry.configurator";
+export * from "./open-telemetry-config.dto";
+export * from "./span-name.decorator";
+export * from "./tracing.interceptor";
