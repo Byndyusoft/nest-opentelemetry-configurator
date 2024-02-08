@@ -1,0 +1,8 @@
+{
+  "extends": "@byndyusoft/tsconfig/tsconfig.node14.json",
+  "compilerOptions": {
+    // Emit
+    "outDir": "./dist"
+  },
+  "include": ["src", "test"]
+}
